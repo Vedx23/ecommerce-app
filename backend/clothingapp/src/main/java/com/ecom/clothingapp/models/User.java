@@ -26,32 +26,42 @@ import lombok.ToString;
 public class User extends Base{
 
     @Column(length = 50, nullable = false)
-    public String firstName;
+    private String firstName;
+    
     @Column(length = 50, nullable = false)
-    public String lastName;
+    private String lastName;
+    
     @Column(length = 100, nullable = false)
-    public String email;
-    @Column(length = 65535, nullable = false)
-    public String password;
+    private String email;
+    
+    @Column(length = 500, nullable = false)
+    private String password;
+    
     @Column(length = 10, nullable = false)
-    public String phoneNumber;
+    private String phoneNumber;
+    
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
-    public Role role;
+    private Role role;
+
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
-    public AccountStatus status;
+    private AccountStatus status;
+
     @Lob
     @Column(nullable = true)
-    public String profilePicture;
-    @Column(nullable = true)
-    public List<Address> addressList;
-    @Column(nullable = true)
-    public Cart cart;
-    @Column(nullable = true)
-    public wishList wishlist;
-    @Column(nullable = true)
-    public List<Orders> orderList;
+    private String profilePicture;
 
+    @Column(nullable = true)
+    private List<Address> addressList;
+    
+    @Column(nullable = true)
+    private Cart cart;
+    
+    @Column(nullable = true)
+    private wishList wishlist;
+    
+    @Column(nullable = true)
+    private List<Orders> orderList;
     
 }
