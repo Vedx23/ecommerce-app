@@ -8,7 +8,7 @@ public class HelloWorld {
     
     @GetMapping("/hw")
     public String helloWorld(){
-        return "<h1 color=red>Hello World</h1>"; 
+        return "<h1>Hello World</h1>"; 
     }
 
 }

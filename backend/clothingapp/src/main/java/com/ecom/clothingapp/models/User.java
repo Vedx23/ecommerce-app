@@ -3,10 +3,12 @@ package com.ecom.clothingapp.models;
 import java.util.List;
 
 import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -54,8 +56,9 @@ public class User extends Base{
     @Column(nullable = true)
     private String profilePicture;
 
-    @OneToMany
+   
     @Column(nullable = true)
+    @OneToMany(mappedBy = "address_items_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AddressItems> addressList;
     
     //one to one

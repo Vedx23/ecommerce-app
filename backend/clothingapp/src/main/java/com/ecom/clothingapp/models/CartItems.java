@@ -17,8 +17,11 @@ import lombok.ToString;
 @Table(name = "cart_items")
 public class CartItems extends Base{
 
+    //many to one
     private Cart cart;
+    //one to one
     private Product product;
+    //just an integer to calculate quantity
     private Long quantity;
 
 }
