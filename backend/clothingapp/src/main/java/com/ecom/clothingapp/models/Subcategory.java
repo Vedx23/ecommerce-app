@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Subcategory extends Base{
 
     
-    private SubCategory subCategory;
+    private Subcat subCategory;
 
     //many to one unidirectional
     private Category category;

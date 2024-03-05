@@ -28,7 +28,6 @@ public class AddressItems extends Base{
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;

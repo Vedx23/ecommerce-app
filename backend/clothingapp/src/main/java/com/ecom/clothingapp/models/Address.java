@@ -5,6 +5,8 @@ import org.hibernate.internal.build.AllowPrintStacktrace;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,16 +23,19 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = "address_id"))
 public class Address extends Base{
 
-    private Country country;
+    private String country;
 
-    private State state;
+    private String state;
 
-    private City city;
+    @Enumerated(EnumType.STRING)
+    private String city;
 
     private Long zipcode;
 
     private String street1;
+
     private String street2;
+    
     private String landmark;
 
 
