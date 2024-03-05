@@ -1,7 +1,5 @@
 package com.ecom.clothingapp.models;
 
-import java.util.List;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,11 +15,14 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-@Entity
-@Table(name = "cart")
-@AttributeOverride(name = "id", column = @Column(name = "cart_id"))
-public class Cart extends Base{
 
-    private List<CartItems> cartItems;
+@Entity
+@Table(name = "wishlistitem")
+@AttributeOverride(name = "id", column = @Column(name = "wishlistitem_id"))
+public class WishListItem extends Base{
+
+    private Product product;
+
+    private Long quantity;
 
 }

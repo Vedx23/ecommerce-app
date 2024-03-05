@@ -20,6 +20,6 @@ public class Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    public Long id;
 
 }

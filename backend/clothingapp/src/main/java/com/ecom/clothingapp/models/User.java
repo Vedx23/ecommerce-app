@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+
 @Entity
 @Table(name = "users")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
@@ -52,15 +54,19 @@ public class User extends Base{
     @Column(nullable = true)
     private String profilePicture;
 
+    @OneToMany
     @Column(nullable = true)
-    private List<Address> addressList;
+    private List<AddressItems> addressList;
     
+    //one to one
     @Column(nullable = true)
     private Cart cart;
     
+    //one to one
     @Column(nullable = true)
-    private wishList wishlist;
+    private WishList wishlist;
     
+    //one to many
     @Column(nullable = true)
     private List<Orders> orderList;
     

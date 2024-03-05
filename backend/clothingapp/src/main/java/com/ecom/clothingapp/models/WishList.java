@@ -17,11 +17,13 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
+
 @Entity
-@Table(name = "cart")
-@AttributeOverride(name = "id", column = @Column(name = "cart_id"))
-public class Cart extends Base{
+@Table(name = "wishlist")
+@AttributeOverride(name = "id", column = @Column(name = "wishlist_id"))
+public class WishList extends Base{
 
-    private List<CartItems> cartItems;
-
+    //one to many 
+    private List<WishListItem> wishListItems;
+    
 }

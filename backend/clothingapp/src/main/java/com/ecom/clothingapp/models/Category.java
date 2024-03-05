@@ -1,27 +1,21 @@
 package com.ecom.clothingapp.models;
 
-import java.util.List;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Setter
+@AllArgsConstructor
 @Getter
+@Setter
 @ToString
-@Entity
-@Table(name = "cart")
-@AttributeOverride(name = "id", column = @Column(name = "cart_id"))
-public class Cart extends Base{
-
-    private List<CartItems> cartItems;
+@AttributeOverride(name = "id", column = @Column(name = "category_id"))
+public class Category extends Base{
+    
+    private CategoryName category;
 
 }
