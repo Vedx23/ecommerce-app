@@ -3,8 +3,10 @@ package com.ecom.clothingapp.models;
 import java.util.List;
 
 import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,10 +22,10 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "wishlist")
-@AttributeOverride(name = "id", column = @Column(name = "wishlist_id"))
+@AttributeOverride(name = "id", column = @Column(name = "wish_list_id"))
 public class WishList extends Base{
 
-    //one to many 
+    @OneToMany(mappedBy = "wishlist", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<WishListItem> wishListItems;
     
 }

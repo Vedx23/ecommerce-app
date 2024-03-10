@@ -9,8 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -56,21 +58,18 @@ public class User extends Base{
     @Column(nullable = true)
     private String profilePicture;
 
-   
-    @Column(nullable = true)
-    @OneToMany(mappedBy = "address_items_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AddressItems> addressList;
     
-    //one to one
-    @Column(nullable = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
     private Cart cart;
     
-    //one to one
-    @Column(nullable = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "wish_list_id", referencedColumnName = "wish_list_id")
     private WishList wishlist;
     
-    //one to many
-    @Column(nullable = true)
+    @OneToMany
     private List<Orders> orderList;
     
 }

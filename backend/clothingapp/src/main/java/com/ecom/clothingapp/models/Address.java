@@ -27,7 +27,6 @@ public class Address extends Base{
 
     private String state;
 
-    @Enumerated(EnumType.STRING)
     private String city;
 
     private Long zipcode;
@@ -37,7 +36,4 @@ public class Address extends Base{
     private String street2;
     
     private String landmark;
-
-
-
 }

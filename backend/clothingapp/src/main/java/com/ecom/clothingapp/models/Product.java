@@ -3,6 +3,9 @@ package com.ecom.clothingapp.models;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +30,8 @@ public class Product extends Base {
 
     private Size size;
 
+    @OneToOne
+    @JoinColumn(name = "sub_category_id", referencedColumnName = "sub_category_id")
     private Subcategory category;
 
     private long stock;

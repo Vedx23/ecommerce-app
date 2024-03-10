@@ -1,8 +1,11 @@
 package com.ecom.clothingapp.models;
 
 import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +24,8 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = "image_id"))
 public class Images extends Base{
     
-    //many to one unidirectional
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private String imageUrl;

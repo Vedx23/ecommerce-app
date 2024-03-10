@@ -4,8 +4,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,20 +32,22 @@ import lombok.ToString;
 @AttributeOverride(name = "id", column = @Column(name = "order_id"))
 public class Orders extends Base{
 
-    //manytoone
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     private Double orderTotal;
 
     private LocalDate date;
 
-    //enum
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    //mapped to payment id
-    //one order will have only one payment
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_id", referencedColumnName = "payment_id")
     private Payment payment;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Orderitems> orderItems;
 
 

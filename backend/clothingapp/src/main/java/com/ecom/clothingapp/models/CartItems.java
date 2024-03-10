@@ -1,6 +1,12 @@
 package com.ecom.clothingapp.models;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,13 +21,17 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "cart_items")
+@AttributeOverride(name = "id", column = @Column(name = "cart_items_id"))
 public class CartItems extends Base{
-
-    //many to one
+    
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
     private Cart cart;
-    //one to one
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     private Product product;
-    //just an integer to calculate quantity
+
     private Long quantity;
 
 }
