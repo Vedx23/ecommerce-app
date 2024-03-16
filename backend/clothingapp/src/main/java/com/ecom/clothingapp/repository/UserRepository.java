@@ -4,13 +4,11 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ecom.clothingapp.models.User;
-
-import jakarta.transaction.Transactional;
-import java.util.List;
+import com.ecom.clothingapp.security.CustomUserDetails;
 
 
-public interface UserRepository extends JpaRepository<User, Long>{
+
+public interface UserRepository extends JpaRepository<CustomUserDetails, Long>{
     
-    Optional<User> findByEmail(String email);
+    Optional<CustomUserDetails> findByEmail(String email);
 }
