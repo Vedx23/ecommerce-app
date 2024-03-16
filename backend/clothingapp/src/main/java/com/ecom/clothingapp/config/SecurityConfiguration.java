@@ -30,7 +30,7 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(requests -> requests
-                        .requestMatchers("/") //whitelisted
+                        .requestMatchers("api/v1/auth/**") //whitelisted
                         .permitAll()
                         .anyRequest() //other requests are to be authenticated
                         .authenticated())

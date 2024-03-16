@@ -3,6 +3,7 @@ package com.ecom.clothingapp.security;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +14,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails{
 
-    private User user;
+    @Autowired
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

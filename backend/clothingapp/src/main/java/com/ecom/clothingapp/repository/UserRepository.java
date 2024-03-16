@@ -1,14 +1,11 @@
 package com.ecom.clothingapp.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.ecom.clothingapp.models.User;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+public interface UserRepository extends JpaRepository<User, Long>{
 
-import com.ecom.clothingapp.security.CustomUserDetails;
+    Optional<User> findByEmail(String email);
 
-
-
-public interface UserRepository extends JpaRepository<CustomUserDetails, Long>{
-    
-    Optional<CustomUserDetails> findByEmail(String email);
 }

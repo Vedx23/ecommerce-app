@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.ecom.clothingapp.repository.UserRepository;
+import com.ecom.clothingapp.security.UserDetailsRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class ApplicationConfig {
 
     @Autowired
-    private UserRepository repository;
+    private UserDetailsRepository repository;
 
     @Bean
     public UserDetailsService userDetailsService() {
