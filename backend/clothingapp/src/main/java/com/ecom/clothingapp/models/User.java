@@ -52,7 +52,7 @@ public class User extends Base{
 
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
-    private AccountStatus status;
+    private AccountStatus status = AccountStatus.ACTIVE;
 
     @Lob
     @Column(nullable = true)

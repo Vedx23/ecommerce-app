@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.ecom.clothingapp.models.User;
+import com.ecom.clothingapp.utils.JWTutils;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
