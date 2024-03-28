@@ -47,8 +47,7 @@ public class User extends Base{
     private String phoneNumber;
     
     @Column(length = 20, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private List<Role> roles;
 
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)

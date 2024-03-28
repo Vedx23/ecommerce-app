@@ -44,9 +44,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         
-        
-
-        return null;
+        return Optional.empty();
 
     }
 
