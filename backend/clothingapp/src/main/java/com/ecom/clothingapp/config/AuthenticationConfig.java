@@ -22,13 +22,13 @@ public class AuthenticationConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService,
+    public AuthenticationProvider<?> authenticationProvider(UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder) {
             
             var authenticationProvider = new DaoAuthenticationProvider();
             authenticationProvider.setUserDetailsService(userDetailsService);
             authenticationProvider.setPasswordEncoder(passwordEncoder);
-            return (AuthenticationProvider) authenticationProvider;
+            return (AuthenticationProvider<?>) authenticationProvider;
 
     }
 

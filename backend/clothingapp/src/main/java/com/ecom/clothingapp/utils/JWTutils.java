@@ -1,8 +1,13 @@
 package com.ecom.clothingapp.utils;
 
+import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.crypto.SecretKey;
+
+import org.apache.commons.lang3.time.DateUtils;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -14,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 public class JWTutils {
 
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256); //or HS384.key() or HS512.key()
+    private static final String ISSUER = "ecom-website";
+    private static final int EXPIRATION_HOURS = 24; //expiration time set for 24 hours
 
     private JWTutils(){
         //private constructor 
@@ -33,7 +40,6 @@ public class JWTutils {
 
         var jwtParser = Jwts.parserBuilder().setSigningKey(SECRET_KEY).build();
         
-
         try {
             return Optional.of(jwtParser.parseClaimsJwt(jwtToken).getBody());
         } catch (JwtException | IllegalArgumentException e) {
@@ -42,6 +48,22 @@ public class JWTutils {
 
         return Optional.empty();
 
+    }
+
+    public String generateToken(String email) {
+
+        Date currentDate = new Date();
+        Date expiration = DateUtils.addHours(currentDate, EXPIRATION_HOURS);
+        String jwtToken = Jwts.builder()
+        .setId(UUID.randomUUID().toString())
+        .setIssuer(ISSUER)
+        .setSubject(email)
+        .signWith(SECRET_KEY)
+        .setIssuedAt(currentDate)
+        .setExpiration(expiration)
+        .compact();
+
+        return jwtToken;
     }
 
 }

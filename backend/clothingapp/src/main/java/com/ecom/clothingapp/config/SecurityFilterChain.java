@@ -9,6 +9,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.ecom.clothingapp.authentication.JwtAuthenticationFilter;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration

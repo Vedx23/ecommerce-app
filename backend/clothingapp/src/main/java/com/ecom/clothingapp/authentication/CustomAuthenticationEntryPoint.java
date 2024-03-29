@@ -1,4 +1,4 @@
-package com.ecom.clothingapp.config;
+package com.ecom.clothingapp.authentication;
 
 import java.io.IOException;
 

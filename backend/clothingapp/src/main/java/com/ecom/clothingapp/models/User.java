@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Builder
 
 @Entity
 @Table(name = "users")
@@ -51,6 +53,7 @@ public class User extends Base{
 
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
+    @Builder.Default //*@builder will take this as the default value of this field*/
     private AccountStatus status = AccountStatus.ACTIVE;
 
     @Lob
