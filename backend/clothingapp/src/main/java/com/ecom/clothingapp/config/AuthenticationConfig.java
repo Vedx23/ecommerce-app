@@ -15,7 +15,7 @@ public class AuthenticationConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfiguration) throws Exception {
-
+        System.out.println("AUTHENTICATION MANAGER BEAN CREATED");
         return authConfiguration.getAuthenticationManager();
 
     }
@@ -23,15 +23,17 @@ public class AuthenticationConfig {
     @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService,
                                                             PasswordEncoder passwordEncoder) {
+        System.out.println("AUTHENTICATION PROVIDER BEAN CREATED");
             var authenticationProvider = new DaoAuthenticationProvider();
             authenticationProvider.setUserDetailsService(userDetailsService);
             authenticationProvider.setPasswordEncoder(passwordEncoder);
-            return (AuthenticationProvider) authenticationProvider;
+            return authenticationProvider;
 
     }
 
     @Bean 
     public PasswordEncoder bCryptPasswordEncoder(){
+        System.out.println("PASSWORD ENCODER BEAN CREATED");
         return new BCryptPasswordEncoder();
     }
 

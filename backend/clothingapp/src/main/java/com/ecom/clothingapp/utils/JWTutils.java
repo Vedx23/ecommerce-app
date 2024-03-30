@@ -6,12 +6,9 @@ import java.util.UUID;
 
 import javax.crypto.SecretKey;
 
+import io.jsonwebtoken.*;
 import org.apache.commons.lang3.time.DateUtils;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,11 +36,13 @@ public class JWTutils {
     private static Optional<Claims> parseToken(String jwtToken){
 
         var jwtParser = Jwts.parserBuilder().setSigningKey(SECRET_KEY).build();
-        
+
         try {
-            return Optional.of(jwtParser.parseClaimsJwt(jwtToken).getBody());
+            Jws<Claims> claimsJws = jwtParser.parseClaimsJws(jwtToken);
+            Claims body = claimsJws.getBody();
+            return Optional.of(body);
         } catch (JwtException | IllegalArgumentException e) {
-            log.error("JWTUtils exception occured");
+            log.error("JWT parsing exception occurred", e);
         }
 
         return Optional.empty();

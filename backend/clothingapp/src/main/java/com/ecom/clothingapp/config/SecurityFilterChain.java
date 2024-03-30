@@ -16,6 +16,7 @@ import com.ecom.clothingapp.authentication.JwtAuthenticationFilter;
 @Configuration
 @AllArgsConstructor
 public class SecurityFilterChain {
+
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
     
@@ -24,16 +25,22 @@ public class SecurityFilterChain {
 
     @Bean
     public DefaultSecurityFilterChain securityFilterChainConfigBean(HttpSecurity httpSecurity) throws Exception{
-
+        System.out.println("SECURITY FILTER CHAIN CONFIG BEAN CREATED");
         httpSecurity.cors(AbstractHttpConfigurer::disable);
+
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
+
         httpSecurity.authorizeHttpRequests(
             requestMatcher -> requestMatcher.requestMatchers("/api/auth/signin/**").permitAll()
             .requestMatchers("/api/auth/signup/**").permitAll()
+            .requestMatchers("api/protected/**").hasAnyRole("USER", "SELLER")
+            .requestMatchers("/api/v1/**").permitAll()
             .anyRequest().authenticated());
         
         httpSecurity.exceptionHandling( exceptionConfig -> exceptionConfig.authenticationEntryPoint(authenticationEntryPoint));
+
         httpSecurity.sessionManagement( sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();

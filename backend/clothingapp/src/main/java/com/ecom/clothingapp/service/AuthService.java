@@ -2,10 +2,10 @@ package com.ecom.clothingapp.service;
 
 import java.util.Optional;
 
-import com.ecom.clothingapp.dto.AuthRequestDto;
+import com.ecom.clothingapp.dto.SignupRequestDto;
 
 public interface AuthService{
 
     Optional<String> signin(String email, String password);
-    Optional<String> signup(AuthRequestDto authRequestDto);    
+    Optional<String> signup(SignupRequestDto signupRequestDto);
 }

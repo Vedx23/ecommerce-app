@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.ecom.clothingapp.dto.AuthRequestDto;
+import com.ecom.clothingapp.dto.SignupRequestDto;
 import com.ecom.clothingapp.models.User;
 import com.ecom.clothingapp.repository.UserRepository;
 import com.ecom.clothingapp.utils.JWTutils;
@@ -32,33 +32,31 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Optional<String> signin(String email, String password) {
-        /*
-        find if user exists by email
-        1. user exists
-            match the passwords if passwords do not match say that password is incorrect
-        2. user does not exist
-            say that username not found sign up instead !
-        */
+        System.out.println("SIGN IN SERVICE CALLED");
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
-        Authentication authenticate = authManager.authenticate(token);
-        String username = ((UserDetails)authenticate.getPrincipal()).getUsername();
-        return Optional.of(JWTutils.generateToken(username));
+        Optional<User> user = userRepository.findByEmail(email);
+
+        return user.map(u -> {
+            UsernamePasswordAuthenticationToken token1 = new UsernamePasswordAuthenticationToken(u.getEmail(), u.getPassword());
+            Authentication authenticate1 = authManager.authenticate(token1);
+            String username1 = ((UserDetails)authenticate1.getPrincipal()).getUsername();
+            return Optional.of(JWTutils.generateToken(username1));
+        }).orElseGet(Optional::empty);
 
     }
 
     @Override
-    public Optional<String> signup(AuthRequestDto authRequestDto) {
+    public Optional<String> signup(SignupRequestDto siginUpRequestDto) {
 
         //construct the user first here
-
+        System.out.println("SIGN UP SERVICE CALLED");
         User user = User.builder()
-        .firstName(authRequestDto.firstName())
-        .lastName(authRequestDto.lastName())
-        .email(authRequestDto.email())
-        .password(passwordEncoder.encode(authRequestDto.password()))
-        .phoneNumber(authRequestDto.phonenumber())
-        .role(authRequestDto.role()).build();
+        .firstName(siginUpRequestDto.firstName())
+        .lastName(siginUpRequestDto.lastName())
+        .email(siginUpRequestDto.email())
+        .password(passwordEncoder.encode(siginUpRequestDto.password()))
+        .phoneNumber(siginUpRequestDto.phonenumber())
+        .role(siginUpRequestDto.role()).build();
 
         if(userRepository.existsByEmail(user.getEmail())){
             log.info("User "+user.getEmail()+"tried creating already existing account");
