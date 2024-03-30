@@ -2,6 +2,8 @@ package com.ecom.clothingapp.controller;
 
 import java.util.Optional;
 
+import com.ecom.clothingapp.service.AuthServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AuthController {
 
     @Autowired
-    public final AuthService authService;
-    
+    public AuthServiceImpl authService;
 
     @PostMapping("/signin")
     public ResponseEntity<AuthResponseDto> signin(@RequestBody AuthRequestDto authRequestDto) {
@@ -37,16 +38,10 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponseDto> signup(@RequestBody AuthRequestDto authRequestDto) {
-        
-        //dto goes to service and will construct the actual user in service, keep the controller
-        //only to call the services
-        //ALL BL to be in service
-        Optional<String> jwtToken = authService.signup(authRequestDto);
-        if(jwtToken.isPresent()){
-            return ResponseEntity.status(HttpStatus.OK).body(new AuthResponseDto(jwtToken.get(), AuthStatus.SIGNUP_SUCCESS));
-        }
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new AuthResponseDto(null, AuthStatus.SIGNUP_FAILURE));
+        Optional<String> jwtToken = authService.signup(authRequestDto);
+        return jwtToken.map(s -> ResponseEntity.status(HttpStatus.OK).body(new AuthResponseDto(s, AuthStatus.SIGNUP_SUCCESS))).orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).body(new AuthResponseDto(null, AuthStatus.SIGNUP_FAILURE)));
+
     }
     
 }

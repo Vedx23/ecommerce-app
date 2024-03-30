@@ -37,6 +37,8 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	//apache commons for date 
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	//swagger
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
 }
 
 tasks.named('bootBuildImage') {

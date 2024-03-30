@@ -1,5 +1,6 @@
 package com.ecom.clothingapp.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,10 +11,13 @@ import com.ecom.clothingapp.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    @Autowired
     private final UserRepository userRepository;
 
     @Override
@@ -23,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("username not found"));
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-                user.getRoles());
+                List.of(user.getRole()));
 
     }
 

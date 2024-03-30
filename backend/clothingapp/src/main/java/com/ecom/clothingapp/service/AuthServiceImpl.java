@@ -3,7 +3,6 @@ package com.ecom.clothingapp.service;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,16 +31,21 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     @Autowired
     private final UserRepository userRepository;
-    @Autowired
-    private final JWTutils jwtUtils;
 
     @Override
     public Optional<String> signin(String email, String password) {
+        /*
+        find if user exists by email
+        1. user exists
+            match the passwords if passwords do not match say that password is incorrect
+        2. user does not exist
+            say that username not found sign up instead !
+        */
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
         Authentication authenticate = authManager.authenticate(token);
         String username = ((UserDetails)authenticate.getPrincipal()).getUsername();
-        return Optional.of(jwtUtils.generateToken(username));
+        return Optional.of(JWTutils.generateToken(username));
 
     }
 
@@ -56,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
         .email(authRequestDto.email())
         .password(passwordEncoder.encode(authRequestDto.password()))
         .phoneNumber(authRequestDto.phonenumber())
-        .roles(List.of(new Role(authRequestDto.authority()))).build();
+        .role(authRequestDto.role()).build();
 
         if(userRepository.existsByEmail(user.getEmail())){
             log.info("User "+user.getEmail()+"tried creating already existing account");
@@ -65,7 +69,7 @@ public class AuthServiceImpl implements AuthService {
 
         try {
             User createdUser = userRepository.save(user);
-            return Optional.of(jwtUtils.generateToken(createdUser.getEmail()));
+            return Optional.of(JWTutils.generateToken(createdUser.getEmail()));
         } catch (IllegalArgumentException e) {
             log.info(e.getMessage()+"\nerror creating a new user for user"+user.toString());
         }

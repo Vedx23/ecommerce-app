@@ -1,5 +1,6 @@
 package com.ecom.clothingapp.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.AttributeOverride;
@@ -48,8 +49,9 @@ public class User extends Base{
     @Column(length = 10, nullable = false)
     private String phoneNumber;
     
-    @Column(length = 20, nullable = false)
-    private List<Role> roles;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)

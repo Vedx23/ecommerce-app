@@ -50,11 +50,12 @@ public class JWTutils {
 
     }
 
-    public String generateToken(String email) {
+    public static String generateToken(String email) {
 
         Date currentDate = new Date();
         Date expiration = DateUtils.addHours(currentDate, EXPIRATION_HOURS);
-        String jwtToken = Jwts.builder()
+
+        return Jwts.builder()
         .setId(UUID.randomUUID().toString())
         .setIssuer(ISSUER)
         .setSubject(email)
@@ -62,8 +63,6 @@ public class JWTutils {
         .setIssuedAt(currentDate)
         .setExpiration(expiration)
         .compact();
-
-        return jwtToken;
     }
 
 }
