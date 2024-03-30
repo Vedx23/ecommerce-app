@@ -1,6 +1,5 @@
 package com.ecom.clothingapp.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.AttributeOverride;
@@ -59,7 +58,7 @@ public class User extends Base{
     private AccountStatus status = AccountStatus.ACTIVE;
 
     @Lob
-    @Column(nullable = true)
+    @Column//by default - (nullable = true)
     private String profilePicture;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

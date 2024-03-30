@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecom.clothingapp.dto.AuthRequestDto;
 import com.ecom.clothingapp.dto.AuthResponseDto;
 import com.ecom.clothingapp.dto.AuthStatus;
-import com.ecom.clothingapp.service.AuthService;
-
-import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
