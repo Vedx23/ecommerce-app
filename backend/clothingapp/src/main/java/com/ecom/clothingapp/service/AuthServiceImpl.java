@@ -1,6 +1,5 @@
 package com.ecom.clothingapp.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ecom.clothingapp.dto.AuthRequestDto;
-import com.ecom.clothingapp.models.Role;
 import com.ecom.clothingapp.models.User;
 import com.ecom.clothingapp.repository.UserRepository;
 import com.ecom.clothingapp.utils.JWTutils;
@@ -71,7 +69,7 @@ public class AuthServiceImpl implements AuthService {
             User createdUser = userRepository.save(user);
             return Optional.of(JWTutils.generateToken(createdUser.getEmail()));
         } catch (IllegalArgumentException e) {
-            log.info(e.getMessage()+"\nerror creating a new user for user"+user.toString());
+            log.info(e.getMessage()+"\n error creating a new user for user"+user);
         }
 
         return Optional.empty();
