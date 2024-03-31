@@ -33,33 +33,33 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Optional<String> signin(String email, String password) {
         System.out.println("SIGN IN SERVICE CALLED");
-
-        Optional<User> user = userRepository.findByEmail(email);
-
-        return user.map(u -> {
-            UsernamePasswordAuthenticationToken token1 = new UsernamePasswordAuthenticationToken(u.getEmail(), u.getPassword());
-            Authentication authenticate1 = authManager.authenticate(token1);
-            String username1 = ((UserDetails)authenticate1.getPrincipal()).getUsername();
-            return Optional.of(JWTutils.generateToken(username1));
-        }).orElseGet(Optional::empty);
-
+        //NOTE TO SELF
+        /*
+        ALL AUTHENTICATION WILL BE DONE BY
+        THE AUTHENTICATION MANAGER AND THERE
+        IS NO NEED OF ANY BOILER PLATE CODE MANUALLY.
+         */
+        UsernamePasswordAuthenticationToken token1 = new UsernamePasswordAuthenticationToken(email, password);
+        Authentication authenticate1 = authManager.authenticate(token1);
+        String username1 = ((UserDetails) authenticate1.getPrincipal()).getUsername();
+        return Optional.of(JWTutils.generateToken(username1));
     }
 
     @Override
-    public Optional<String> signup(SignupRequestDto siginUpRequestDto) {
+    public Optional<String> signup(SignupRequestDto signUpRequestDto) {
 
         //construct the user first here
         System.out.println("SIGN UP SERVICE CALLED");
         User user = User.builder()
-        .firstName(siginUpRequestDto.firstName())
-        .lastName(siginUpRequestDto.lastName())
-        .email(siginUpRequestDto.email())
-        .password(passwordEncoder.encode(siginUpRequestDto.password()))
-        .phoneNumber(siginUpRequestDto.phonenumber())
-        .role(siginUpRequestDto.role()).build();
+                .firstName(signUpRequestDto.firstName())
+                .lastName(signUpRequestDto.lastName())
+                .email(signUpRequestDto.email())
+                .password(passwordEncoder.encode(signUpRequestDto.password()))
+                .phoneNumber(signUpRequestDto.phonenumber())
+                .role(signUpRequestDto.role()).build();
 
-        if(userRepository.existsByEmail(user.getEmail())){
-            log.info("User "+user.getEmail()+"tried creating already existing account");
+        if (userRepository.existsByEmail(user.getEmail())) {
+            log.info("User " + user.getEmail() + "tried creating already existing account");
             return Optional.empty();
         }
 
@@ -67,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
             User createdUser = userRepository.save(user);
             return Optional.of(JWTutils.generateToken(createdUser.getEmail()));
         } catch (IllegalArgumentException e) {
-            log.info(e.getMessage()+"\n error creating a new user for user"+user);
+            log.info(e.getMessage() + "\n error creating a new user for user" + user);
         }
 
         return Optional.empty();

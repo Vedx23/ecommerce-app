@@ -33,7 +33,7 @@ public class AuthController {
         Optional<String> jwtToken = authService.signin(signinRequestDto.email(), signinRequestDto.password());
         return jwtToken.map(token -> ResponseEntity.status(HttpStatus.OK)
                         .body(new AuthResponseDto(token, AuthStatus.SIGNIN_SUCCESS)))
-                .orElseGet(()->ResponseEntity.status(HttpStatus.OK)
+                .orElseGet(()->ResponseEntity.status(HttpStatus.CONFLICT)
                         .body(new AuthResponseDto(null, AuthStatus.SIGNIN_FAILURE)));
     }
 

@@ -12,7 +12,7 @@ import com.ecom.clothingapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
+//custom user details service
 @Component
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {

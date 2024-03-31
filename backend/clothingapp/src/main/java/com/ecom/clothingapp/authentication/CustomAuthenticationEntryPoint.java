@@ -21,7 +21,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
-        System.out.println("SOMETHING WENT WRONG, I AM A TEAPOT");
+        System.out.println("Filter chain threw an exception");
                 response.sendError(HttpStatus.I_AM_A_TEAPOT.value(), AuthStatus.UNAUTHORIZED.name());
     }
 
