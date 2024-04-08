@@ -1,11 +1,15 @@
 package com.ecom.clothingapp.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,10 +31,6 @@ public class Product extends Base {
     private Size size;
 
     @OneToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private Category category;
-
-    @OneToOne
     @JoinColumn(name = "sub_category_id", referencedColumnName = "sub_category_id")
     private Subcategory subcategory;
 
@@ -40,5 +40,9 @@ public class Product extends Base {
     private Color color;
 
     private Double price;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Images> images = new ArrayList<>();
     
 }
