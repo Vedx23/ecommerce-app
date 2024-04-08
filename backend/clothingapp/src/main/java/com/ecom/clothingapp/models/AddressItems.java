@@ -1,12 +1,6 @@
 package com.ecom.clothingapp.models;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +26,7 @@ public class AddressItems extends Base{
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 
+    @Enumerated(EnumType.STRING)
     private AddressStatus status;
 
 }

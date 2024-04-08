@@ -15,7 +15,6 @@ public class ProtectedResource {
     public ResponseEntity<String> getProtectedResource() {
         System.out.println("PROTECTED RESOURCE CALLED");
         return ResponseEntity.status(HttpStatus.OK).body("secret message received :)");
-
     }
 
 }

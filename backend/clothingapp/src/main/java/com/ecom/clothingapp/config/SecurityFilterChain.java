@@ -33,7 +33,9 @@ public class SecurityFilterChain {
         httpSecurity.authorizeHttpRequests(
             requestMatcher -> requestMatcher.requestMatchers("/api/auth/signin/**").permitAll()
             .requestMatchers("/api/auth/signup/**").permitAll()
-            .requestMatchers("api/protected/**").hasAnyRole("USER", "SELLER")
+            .requestMatchers("api/v1/user/**").hasRole("USER")
+            .requestMatchers("api/v1/seller/**").hasRole("SELLER")
+            .requestMatchers("api/v1/admin/**").hasRole("ADMIN")
             .requestMatchers("/api/v1/**").permitAll()
             .anyRequest().authenticated());
         
