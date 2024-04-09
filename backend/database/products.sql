@@ -1,0 +1,1 @@
+insert into product values(default, 'RED', 999.00, "A comforting tshirt for men made of egyptian pure cotton, great for all seasons from latest timeless collection", "a red tshirt from timeless collection", 'L', 943, 2);
