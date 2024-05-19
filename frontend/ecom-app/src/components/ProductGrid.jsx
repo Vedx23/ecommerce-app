@@ -12,22 +12,27 @@ const ProductGrid = () => {
     { id: 6, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
     { id: 7, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
     { id: 8, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
-    { id: 9, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
-    { id: 10, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
-    { id: 11, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
-    { id: 12, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
-    { id: 13, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
-    { id: 14, name: 'Puma Blaze', description: 'Stylish urban sneakers', price: '₹1099', image: 'https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg' },
     // Add more product data as needed
   ];
 
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 border-4 border-black">
+  return (<>
+  <div className='min-w-full p-4 text-white border border-white'>
+      <ul>
+        <h2>
+          sort by
+        </h2>
+        <li>
+          
+        </li>
+      </ul>
+  </div>
+  <div className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4">
       {/* Map over products array and render ProductCard for each */}
       {products.map(product => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
+  </>
   );
 };
 

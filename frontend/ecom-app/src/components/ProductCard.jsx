@@ -4,7 +4,7 @@ import 'daisyui/dist/full.css';
 
 const ProductCard = (props) => {
     return (
-        <div className="card shadow-md w-full max-w-xs mx-auto">
+        <div className="card shadow-md w-full max-w-xs mx-auto bg-slate-100">
             <div className="flex flex-col h-full">
                 <figure className="flex-grow-[7]">
                     <img
@@ -23,7 +23,9 @@ const ProductCard = (props) => {
                         <p className="badge badge-sm badge-success font-bold text-white mb-2">In Stock</p>
                         <div className="card-actions flex justify-between">
                             <button className="btn btn-sm btn-outline">Add to cart</button>
-                            <button className="btn btn-sm btn-outline">Buy now</button>
+                            <div className='tooltip tooltip-error tooltip-top' data-tip="feature coming soon">
+                            <button className="btn btn-sm btn-outline" disabled>Buy now</button>
+                            </div>
                         </div>
                     </div>
                 </div>
