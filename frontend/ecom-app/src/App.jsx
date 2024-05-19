@@ -1,9 +1,11 @@
 import React from 'react'
-
+import HomeLayout from './components/HomeLayout'
+import ProductGrid from './components/ProductGrid'
 const App = () => {
   return (
     <>
-    <h1 className='text-9xl text-black'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat quisquam, corporis fugit rerum neque, veniam inventore possimus accusantium dicta sequi reiciendis eveniet, dolor earum cupiditate nam necessitatibus quis a non.</h1>
+      <HomeLayout></HomeLayout>
+      <ProductGrid></ProductGrid>
     </>
   )
 }
